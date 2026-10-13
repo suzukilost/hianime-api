@@ -1,6 +1,5 @@
 import { Hono } from 'hono';
-import { handle } from 'hono/vercel';
-import { cors } from 'hono/cors';
+import { getRequestListener } from '@hono/node-server';import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import hiAnimeRoutes from '../src/routes/routes';
 import config from '../src/config/config';
@@ -59,4 +58,4 @@ app.notFound((c) => {
   return fail(c, 'Route not found', 404);
 });
 
-export default handle(app);
+export default getRequestListener(app.fetch);
